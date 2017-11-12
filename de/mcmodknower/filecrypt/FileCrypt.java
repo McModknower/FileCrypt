@@ -14,7 +14,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -22,22 +21,19 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 
 /**
- *
  * Ein einfacher Dateiverschlüsseler
- *
+ * 
  * @author McModknower
  */
 
 public class FileCrypt extends Frame {
 	private static final long serialVersionUID = -4458515117637023280L;
-	// Anfang Attribute
 	private TextField tfDateiname = new TextField();
 	private TextField tfPasswort = new TextField();
 	private TextArea taAnzeige = new TextArea("", 1, 1, TextArea.SCROLLBARS_BOTH);
 	private Button bEntschlusseln = new Button();
 	private Button bVerschlusseln1 = new Button();
 	private JFileChooser fc = new JFileChooser();
-	// Ende Attribute
 
 	public FileCrypt() {
 		// Frame-Initialisierung
@@ -102,7 +98,7 @@ public class FileCrypt extends Frame {
 		setVisible(true);
 	}
 
-	// Anfang Methoden
+	// Begin Methods
 
 	public static void main(String[] args) {
 		new FileCrypt();
@@ -149,11 +145,11 @@ public class FileCrypt extends Frame {
 		if (!readInputs())
 			return;
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(file));
-			String line;
+			FileReader br = new FileReader(file);
+			int line;
 			text = "";
-			while ((line = br.readLine()) != null) {
-				text = text + line;
+			while ((line = br.read())>-1) {
+				text = text + ((char)line);
 			}
 			br.close();
 		} catch (IOException e) {
@@ -200,4 +196,4 @@ public class FileCrypt extends Frame {
 	}
 
 	// end Methods
-} // end of class
+} // end of class FileCrypt
